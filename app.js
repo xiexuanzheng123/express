@@ -1,5 +1,8 @@
 var express = require('express');
 var app = express();
+var birds = require('./app/birds.js');
+
+app.use('/birds', birds);
 
 var cb0 = function(req, res, next) {
     console.log('CB0');
