@@ -1,13 +1,27 @@
 var express = require('express');
 var app = express();
 
-// app.get('/',function(req, res) {
-//     res.send('Hello World!');
-// });
-app.all('/secret', function(req, res, next) {
-    console.log('Accessing the secret section...');
-    next(); //对于一个路径上的所有请求加载中间件
+var cb0 = function(req, res, next) {
+    console.log('CB0');
+    next();
+}
+
+var cb1 = function(req, res, next) {
+    console.log('cb1');
+    next();
+}
+
+app.get('/example',[cb0, cb1], function(req, res, next) {
+    console.log('response will be sent by the next function...');
+    next();
+},function(req, res) {
+    res.send('Hello from D');
 });
+
+// app.all('/secret', function(req, res, next) {
+//     console.log('Accessing the secret section...');
+//     next(); //对于一个路径上的所有请求加载中间件
+// });
 
 app.use(express.static(__dirname));
 
