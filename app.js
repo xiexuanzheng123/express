@@ -21,10 +21,10 @@ app.get('/example',[cb0, cb1], function(req, res, next) {
     res.send('Hello from D');
 });
 
-// app.all('/secret', function(req, res, next) {
-//     console.log('Accessing the secret section...');
-//     next(); //对于一个路径上的所有请求加载中间件
-// });
+app.all('/secret', function(req, res, next) {
+    console.log('Accessing the secret section...');
+    next(); //对于一个路径上的所有请求加载中间件
+});
 
 app.use(express.static(__dirname));
 
